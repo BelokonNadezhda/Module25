@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ПОИСК ФИЛЬМА</string>
+    <string name="res_text">Текст из ресурсов</string>
+    <string name="name_button">Нажми</string>
+    <string name="disclaimer">Постеры предоставлены https://www.movieposters.com/</string>
+    <string name="btn1">МЕНЮ</string>
+    <string name="btn2">ИЗБРАННОЕ</string>
+    <string name="btn3">ПОСМОТРЕТЬ ПОЗЖЕ</string>
+    <string name="btn4">ПОДБОРКИ</string>
+    <string name="btn5">НАСТРОЙКИ</string>
+    <string name="menu_settings_title">ПОИСК</string>
+    <string name="menu_favorites_title">Избранное</string>
+    <string name="menu_watch_later_title">Смотреть позже</string>
+    <string name="menu_selections_title">Подборки</string>
+    <string name="page_title">Поиск фильма</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
