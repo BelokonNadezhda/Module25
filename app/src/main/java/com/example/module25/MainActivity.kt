@@ -12,6 +12,7 @@ import android.content.res.Resources
 import android.graphics.Rect
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -81,7 +82,11 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_placeholder, FavoritesFragment())
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
                 R.id.watch_later -> {
@@ -95,5 +100,9 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+
+
+
     }
 }

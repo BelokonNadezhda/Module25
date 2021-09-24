@@ -49,11 +49,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|right"
-        app:srcCompat="@drawable/ic_star"
+        app:srcCompat="@drawable/ic_share"
         android:tint="@android:color/white"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_fab_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:borderWidth="0dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="left|bottom"
+        app:srcCompat="@drawable/ic_favorite"
+        app:tint="@android:color/white"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
