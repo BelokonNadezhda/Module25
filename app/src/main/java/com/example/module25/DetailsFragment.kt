@@ -33,7 +33,7 @@ class DetailsFragment : Fragment() {
             }
         }
 
-        details_fab.setOnClickListener {
+        details_fab_share.setOnClickListener {
             //Создаем интент
             val intent = Intent()
             //Укзываем action с которым он запускается
@@ -48,8 +48,6 @@ class DetailsFragment : Fragment() {
             //Запускаем наше активити
             startActivity(Intent.createChooser(intent, "Share To:"))
         }
-
-
     }
 
     private fun setFilmsDetails() {
