@@ -1,7 +1,9 @@
 import com.example.module25.Film
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.module25.R
 import kotlinx.android.synthetic.main.film_item.view.*
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)
@@ -10,6 +12,10 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val title = itemView.title
     private val poster = itemView.poster
     private val description = itemView.description
+    //Вот здесь мы находим в верстке наш прогресс бар для рейтинга
+    private val ratingDonut = itemView.rating_donut
+
+    val myAnimation = AnimationUtils.loadAnimation(itemView.context,R.anim.my_animation)
 
     //В этом методе кладем данные из film в наши view
     fun bind(film: Film) {
@@ -26,5 +32,9 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .into(poster)
         //Устанавливаем описание
         description.text = film.description
+        //Устанавливаем рэйтинг
+        ratingDonut.setProgress((film.rating * 10).toInt())
+        // пробуем анимировать рейтинг
+        ratingDonut.startAnimation(myAnimation)
     }
 }
