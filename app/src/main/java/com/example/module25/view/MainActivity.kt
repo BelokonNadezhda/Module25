@@ -4,6 +4,7 @@ package com.example.module25.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.module25.API
 import com.example.module25.R
 import com.example.module25.databinding.ActivityMainBinding
 import com.example.module25.domain.Film
