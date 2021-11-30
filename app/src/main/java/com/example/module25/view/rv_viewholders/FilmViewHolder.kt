@@ -1,4 +1,6 @@
-import com.example.module25.Film
+package com.example.module25.view.rv_viewholders
+
+import com.example.module25.domain.Film
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView

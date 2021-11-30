@@ -1,4 +1,4 @@
-package com.example.module25
+package com.example.module25.utils
 
 import android.app.Activity
 import android.view.View

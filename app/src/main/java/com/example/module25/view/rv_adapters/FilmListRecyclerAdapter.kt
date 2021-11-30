@@ -1,7 +1,10 @@
+package com.example.module25.view.rv_adapters
+
+import com.example.module25.view.rv_viewholders.FilmViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.module25.Film
+import com.example.module25.domain.Film
 import com.example.module25.R
 import kotlinx.android.synthetic.main.film_item.view.*
 
@@ -15,7 +18,9 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
 
     //В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FilmViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false))
+        return FilmViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false)
+        )
     }
 
     //В этом методе будет привзяка полей из объекта Film, к view из film_item.xml

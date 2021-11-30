@@ -1,6 +1,6 @@
-package com.example.module25
+package com.example.module25.view.fragments
 
-import FilmListRecyclerAdapter
+import com.example.module25.view.rv_adapters.FilmListRecyclerAdapter
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
@@ -8,7 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.module25.view.MainActivity
+import com.example.module25.R
+import com.example.module25.view.rv_adapters.TopSpacingItemDecoration
+import com.example.module25.databinding.FragmentHomeBinding
+import com.example.module25.domain.Film
+import com.example.module25.utils.AnimationHelper
+import com.example.module25.viewmodel.HomeFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.merge_home_screen_content.*
 import java.util.*
@@ -19,18 +27,22 @@ import java.util.*
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment. */
 class HomeFragment : Fragment() {
-
+    private val viewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
+    }
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-    val filmsDataBase = listOf(
-        Film("Мстители: Финал ", R.drawable.film1, "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",5.3f),
-        Film("Война будущего",R.drawable.film2,"A family man is drafted to fight in a future war where the fate of humanity relies on his ability to confront the past.",4.4f),
-        Film("Человек-паук: Возвращение домой",R.drawable.film3,"Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City.",8.2f),
-        Film("Белый лотос",R.drawable.film4,"Set in a tropical resort, it follows the exploits of various guests and employees over the span of a week.",6.9f),
-        Film("Круиз по джунглям",R.drawable.film5,"Based on Disneyland's theme park ride where a small riverboat takes a group of travelers through a jungle filled with dangerous animals and reptiles but with a supernatural element.",7.7f),
-        Film("AQUAMEN",R.drawable.film6,"Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",3.9f),
-        Film("Лука",R.drawable.film7,"On the Italian Riviera, an unlikely but strong friendship grows between a human being and a sea monster disguised as a human.",5.0f)
-    )
+    private lateinit var binding: FragmentHomeBinding
 
+    private var filmsDataBase = listOf<Film>()
+        //Используем backing field
+        set(value) {
+            //Если придет такое же значение, то мы выходим из метода
+            if (field == value) return
+            //Если пришло другое значение, то кладем его в переменную
+            field = value
+            //Обновляем RV адаптер
+            filmsAdapter.addItems(field)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +53,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,17 +66,20 @@ class HomeFragment : Fragment() {
 
         //находим наш RV
         initRecyckler()
-        //Кладем нашу БД в RV
-        filmsAdapter.addItems(filmsDataBase)
+
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer<List<Film>> {
+            filmsDataBase = it
+        })
     }
 
     private fun initSearchView() {
-        search_view.setOnClickListener {
-            search_view.isIconified = false
+
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
         }
 
         //Подключаем слушателя изменений введенного текста в поиска
-        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -91,7 +107,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyckler() {
-        main_recycler.apply {
+
+        binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
