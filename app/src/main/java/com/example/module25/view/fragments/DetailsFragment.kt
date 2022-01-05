@@ -10,7 +10,7 @@ import com.example.module25.R
 import com.example.module25.data.ApiConstants
 import com.example.module25.databinding.FragmentDetailsBinding
 import com.example.module25.domain.Film
-import kotlinx.android.synthetic.main.fragment_details.*
+//import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film
@@ -63,14 +63,14 @@ class DetailsFragment : Fragment() {
 
         //Устанавливаем заголовок
 
-        details_toolbar.title = film.title
+        binding.detailsToolbar.title = film.title
         //Устанавливаем картинку
         Glide.with(this)
             .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
             .centerCrop()
             .into(binding.detailsPoster)
         //Устанавливаем описание
-        details_description.text = film.description
+        binding.detailsDescription.text = film.description
 
         binding.detailsFabFavorites.setImageResource(
             if (film.isInFavorites) R.drawable.ic_favorite

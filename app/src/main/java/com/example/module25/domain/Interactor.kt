@@ -8,7 +8,6 @@ import com.example.module25.viewmodel.HomeFragmentViewModel
 
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Converter
 import retrofit2.Response
 
 class Interactor(private val repo: MainRepository, private val retrofitService: TmdbApi) {
@@ -18,7 +17,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
         retrofitService.getFilms(API.key, "ru-RU", page).enqueue(object : Callback<TmdbResultsDto> {
             override fun onResponse(call: Call<TmdbResultsDto>, response: Response<TmdbResultsDto>) {
                 //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
-                callback.onSuccess(com.example.module25.utils.Converter.convertApiListToDtoList(response.body()?.tmdbFilms))
+                callback.onSuccess(convertApiListToDtoList(response.body()?.tmdbFilms))
             }
 
             override fun onFailure(call: Call<TmdbResultsDto>, t: Throwable) {

@@ -17,8 +17,8 @@ import com.example.module25.databinding.FragmentHomeBinding
 import com.example.module25.domain.Film
 import com.example.module25.utils.AnimationHelper
 import com.example.module25.viewmodel.HomeFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.merge_home_screen_content.*
+//import kotlinx.android.synthetic.main.fragment_home.*
+//import kotlinx.android.synthetic.main.merge_home_screen_content.*
 import java.util.*
 
 
@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
 
         initSearchView()
 
